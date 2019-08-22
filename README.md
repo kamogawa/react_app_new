@@ -1,1 +1,2 @@
-# react_app_new
+# React JS 2019
+New Movie App for ReactJS
