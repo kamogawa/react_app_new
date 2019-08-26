@@ -1,8 +1,8 @@
 import React from "react";
 
-function Test() {
+function Test({ name }) {
   return (
-    <h3>Test</h3>
+    <h3>{name}</h3>
   );
 }
 
