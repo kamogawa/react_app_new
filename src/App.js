@@ -4,21 +4,24 @@ import Test from './Component/Test'
 const food = [
   {
     name: "tonkatsu",
-    location: "ueno"
+    location: "ueno",
+    rating: 8.5
   },
   {
     name: "ramen",
-    location: "akiba"
+    location: "akiba",
+    rating: 7.0
 
   },
   {
     name: "gyoza",
-    location: "kanda"
+    location: "kanda",
+    rating: 9.5
   },
 ]
 
 const testCall = (v, i) => {
-  return (<Test key={i} name={v.name}/>);
+  return (<Test key={i} name={v.name} rating={v.rating}/>);
 }
 
 function App() {
