@@ -3,10 +3,15 @@ import PropsTypes from 'prop-types';
 
 class Test extends React.Component {
 
-  state = {
-    count: 10,
-    rating: this.props.rating
-  };
+  constructor(props){
+    super(props)
+    this.state = {
+      count: 10,
+      rating: this.props.rating,
+      name: this.props.name
+    };
+  }
+
   
   addCount = () => {    
     this.setState(
@@ -31,13 +36,27 @@ class Test extends React.Component {
       }
     );
   }
+
+  componentDidMount() {
+    console.log("didmount");
+  }
+
+  componentDidUpdate() {
+    console.log("didupdate");
+  }
+
+  componentWillUnmount() {
+    console.log("didunmint");
+  }
+
   render() {
-    const {name} = this.props
-    
+    const {rating,count,name} = this.state
+
+    console.log("render");
     return (
     <div>
       <h3>{name}</h3>
-      <div>{this.state.rating}/{this.state.count}</div>
+      <div>{rating}/{count}</div>
       <button onClick={this.addCount}>Add</button>
       <button onClick={this.minusCount}>Minus</button>
     </div>
