@@ -1,50 +1,38 @@
 import React from 'react';
-import Test from './Component/Test' 
+import axios from 'axios';
+import Movie from './Movie';
 
 class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      isLoading: true,
-      food: [
-        {
-          name: "tonkatsu",
-          location: "ueno",
-          rating: 8.5
-        },
-        {
-          name: "ramen",
-          location: "akiba",
-          rating: 7.0
-      
-        },
-        {
-          name: "gyoza",
-          location: "kanda",
-          rating: 9.5
-        },
-      ]
-      
+      movie: [],
+      isLoading: true
     }
   };
 
-  testCall = (v, i) => {
-    return (<Test key={i} name={v.name} rating={v.rating}/>);
-  }
+  getMovie = async () => {
+    const {
+      data: {
+        data: {movies}
+      }
+    } = await axios.get("https://yts-proxy.now.sh/list_movies.json?sort_by=rating");
+
+    this.setState({movies, isLoading: false});
+  };
 
   componentDidMount(){
-    setTimeout(() => {
-      this.setState({isLoading:false})
-    }, 3000);
+    this.getMovie();
   }
 
   render() {
-    const {isLoading, food} = this.state
+    const {isLoading, movies} = this.state
+    console.log(movies);
+
     return (
       <div>
-        <h1>{isLoading ? "Loading" : "Ready!" }</h1>
-        <h1>Component test</h1>
-        {food.map(this.testCall)}
+        <h1>Movie</h1>
+        <h1>{isLoading ? "Loading" : movies.map(v =>(<Movie key={v.id} id={v.id} title={v.title}/>))}</h1>
       </div>
     );
   }
