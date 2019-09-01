@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import Movie from './Movie';
+import Movie from './Component/Movies';
 
 class App extends React.Component {
   constructor(props) {
@@ -30,10 +30,28 @@ class App extends React.Component {
     console.log(movies);
 
     return (
-      <div>
-        <h1>Movie</h1>
-        <h1>{isLoading ? "Loading" : movies.map(v =>(<Movie key={v.id} id={v.id} title={v.title}/>))}</h1>
-      </div>
+      <secction className="container">
+      { isLoading 
+        ? (<div className="loader">
+              <span className="loader_text">Loading...</span>
+            </div>
+        ) : (
+          <div className="movies">
+            {movies.map(movie => (
+              <Movie
+                key={movie.id}
+                id={movie.id}
+                year={movie.year}
+                title={movie.title}
+                summary={movie.summary}
+                poster={movie.medium_cover_image}
+                genres={movie.genres}
+              />
+            ))}
+          </div>
+        )
+      }
+      </secction>
     );
   }
 }
